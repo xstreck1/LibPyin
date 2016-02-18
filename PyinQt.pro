@@ -25,7 +25,8 @@ HEADERS += \
     pyin/VampYin.h \
     pyin/Yin.h \
     pyin/YinUtil.h \
-    normal_dist_pdf.h
+    normal_dist_pdf.h \
+    pyincpp.h
 
 unix {
     target.path = /usr/lib
@@ -49,4 +50,5 @@ SOURCES += \
     pyin/VampYin.cpp \
     pyin/Yin.cpp \
     pyin/YinUtil.cpp \
-    normal_dist_pdf.cpp
+    normal_dist_pdf.cpp \
+    pyincpp.cpp
