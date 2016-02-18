@@ -1,0 +1,12 @@
+#ifndef PYINQT_GLOBAL_H
+#define PYINQT_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(SHAREDLIBRARY_LIBRARY)
+#  define SHAREDLIBRARYSHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define SHAREDLIBRARYSHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // PYINQT_GLOBAL_H
