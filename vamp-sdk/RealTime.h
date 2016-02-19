@@ -44,9 +44,6 @@
 #ifndef _VAMP_REAL_TIME_H_
 #define _VAMP_REAL_TIME_H_
 
-
-#include "../pyinqt_global.h"
-
 #include <iostream>
 #include <string>
 
@@ -66,7 +63,7 @@ namespace Vamp {
  * with accurate arithmetic and frame-rate conversion functions.
  */
 
-struct SHAREDLIBRARYSHARED_EXPORT RealTime
+struct RealTime
 {
     int sec;
     int nsec;

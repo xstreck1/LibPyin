@@ -1,18 +1,25 @@
 #ifndef PYINCPP_H
 #define PYINCPP_H
 
-#include "pyin/PYIN.h"
-
+#include <vector>
+#include <memory>
 
 #ifdef _WIN32
-    #ifdef BUILD_SHARED
-        #define SHARED_EXPORT __declspec(dllexport)
-    #else
-        #define SHARED_EXPORT __declspec(dllimport)
-    #endif
+#ifdef BUILD_SHARED
+#define SHARED_EXPORT __declspec(dllexport)
 #else
-    #define SHARED_EXPORT
+#define SHARED_EXPORT __declspec(dllimport)
 #endif
+#else
+#define SHARED_EXPORT
+#endif
+
+class PYIN;
+namespace _VampPlugin{
+    namespace Vamp {
+        struct RealTime;
+    }
+}
 
 class SHARED_EXPORT PyinCpp  {
     // as far as I can tell PYIN cannot work with more than 1 channel
@@ -26,12 +33,12 @@ class SHARED_EXPORT PyinCpp  {
     // the object return only the pitches that have the probability higher than _CUT_OFF_THRESHOLD
     const int _CUT_OFF_THRESHOLD;
     // time difference between two mined pitches
-    const Vamp::RealTime _TIME_STEP;
+    const _VampPlugin::Vamp::RealTime * _TIME_STEP;
 
     // PYIN object
-    PYIN _pyin;
+    PYIN * _pyin;
     // time counter
-    Vamp::RealTime _time;
+    _VampPlugin::Vamp::RealTime * _time;
     // Holds all the samples in the current recording (which is of the same length as the song being played)
     std::vector<float> _samples;
     // Holds the extracted fequencies
@@ -39,12 +46,11 @@ class SHARED_EXPORT PyinCpp  {
     // First not-yet converted sample
     std::size_t _conversion_head;
 
-    // conversion method, fills the _pitches vector
-    void addPitchesFromFeatures(const PYIN::FeatureSet &features);
 public:
     PyinCpp(const int sample_rate, const int block_size, const int step_size, const float cut_off_threshold = 0.0, const int expected_sample_count = 0);
+    ~PyinCpp();
     // Feed new data and obtain the pitches mined using the new data
-    std::vector<float> feed(const vector<float> & new_samples);
+    std::vector<float> feed(const std::vector<float> & new_samples);
     // Get all the mined pitches
     const std::vector<float> & getPitches() const;
     // Resets to the after-construction state

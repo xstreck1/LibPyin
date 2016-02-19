@@ -2,7 +2,7 @@ TEMPLATE = lib
 
 CONFIG += console c++11
 
-DEFINES += SHAREDLIBRARY_LIBRARY
+DEFINES += BUILD_SHARED
 
 HEADERS += \
     pyinqt_global.h \

@@ -37,7 +37,6 @@
 #ifndef VAMP_HEADER_INCLUDED
 #define VAMP_HEADER_INCLUDED
 
-#import "pyinqt_global.h"
 
 #ifdef __cplusplus
 extern "C" {

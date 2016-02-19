@@ -14,13 +14,11 @@
 #ifndef _PYIN_H_
 #define _PYIN_H_
 
-#include "../pyinqt_global.h"
-
 #include <vamp-sdk/Plugin.h>
 
 #include "Yin.h"
 
-class SHAREDLIBRARYSHARED_EXPORT PYIN : public Vamp::Plugin
+class PYIN : public Vamp::Plugin
 {
 public:
     PYIN(float inputSampleRate);

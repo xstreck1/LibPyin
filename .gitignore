@@ -1,3 +1,9 @@
+build/*
+
+# CMAKE
+CMakeLists.txt.user
+
+
 # C++ objects and libs
 
 *.slo
@@ -83,3 +89,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+

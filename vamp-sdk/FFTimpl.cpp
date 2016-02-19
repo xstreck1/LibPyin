@@ -1,6 +1,8 @@
 
 /* Public domain FFT implementation from Don Cross. */
 
+#include <cmath>
+
 #define M_PI 3.14159
 
 static void
@@ -30,7 +32,7 @@ fft(unsigned int n, bool inverse,
     }
 
 #ifdef _MSC_VER
-    int *table = (int *)_malloca(n * sizeof(int));
+    int *table = (int *)malloc(n * sizeof(int));
 #else
     int table[n];
 #endif
@@ -112,7 +114,7 @@ fft(unsigned int n, bool inverse,
     }
 
 #ifdef _MSC_VER
-    _freea(table);
+    free(table);
 #endif
 }
 
