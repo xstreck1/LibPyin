@@ -24,14 +24,17 @@ namespace _VampPlugin{
 class SHARED_EXPORT PyinCpp  {
     // as far as I can tell PYIN cannot work with more than 1 channel
     static constexpr int _CHANNEL_COUNT = 1;
+    //
+    static constexpr int _DEFAULT_BLOCK_SIZE = 2048;
+    //
+    static constexpr int _DEFAULT_STEP_SIZE = 512;
+
     // number of samples per second
     const int _SAMPLE_RATE;
     // length of a step between two mined pitches, the smaller the slower, 512 is recommended
     const int _STEP_SIZE;
     // length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended
     const int _BLOCK_SIZE;
-    // the object return only the pitches that have the probability higher than _CUT_OFF_THRESHOLD
-    const int _CUT_OFF_THRESHOLD;
     // time difference between two mined pitches
     const _VampPlugin::Vamp::RealTime * _TIME_STEP;
 
@@ -46,9 +49,18 @@ class SHARED_EXPORT PyinCpp  {
     // First not-yet converted sample
     std::size_t _conversion_head;
 
+    // Paramteres
+    // the thresholds for when to still consider pitch a success
+    int _cut_off;
+
 public:
-    PyinCpp(const int sample_rate, const int block_size, const int step_size, const float cut_off_threshold = 0.0, const int expected_sample_count = 0);
+    PyinCpp(const int sample_rate, const int block_size = _DEFAULT_BLOCK_SIZE, const int step_size = _DEFAULT_STEP_SIZE);
     ~PyinCpp();
+    // The cut off is a number between [0-1] that says whether to
+    void setCutOff(const float cut_off);
+    float getCutOff();
+    // Reserves the internal vectors for the given number of expected samples
+    void reserve(int sample_count);
     // Feed new data and obtain the pitches mined using the new data
     std::vector<float> feed(const std::vector<float> & new_samples);
     // Get all the mined pitches

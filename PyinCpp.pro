@@ -1,11 +1,10 @@
 TEMPLATE = lib
 
-CONFIG += console c++11
+CONFIG += c++11
 
 DEFINES += BUILD_SHARED
 
 HEADERS += \
-    pyinqt_global.h \
     vamp/vamp.h \
     vamp-sdk/FFT.h \
     vamp-sdk/plugguard.h \
