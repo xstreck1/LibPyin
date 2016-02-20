@@ -35,7 +35,6 @@ void PyinCpp::setCutOff(const float cut_off) {
     _cut_off = cut_off;
 }
 
-
 float PyinCpp::getCutOff() {
     return _cut_off;
 }

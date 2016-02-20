@@ -4,15 +4,7 @@
 #include <vector>
 #include <memory>
 
-#ifdef _WIN32
-#ifdef BUILD_SHARED
-#define SHARED_EXPORT __declspec(dllexport)
-#else
-#define SHARED_EXPORT __declspec(dllimport)
-#endif
-#else
-#define SHARED_EXPORT
-#endif
+#include "shared_export_def.h"
 
 class PYIN;
 namespace _VampPlugin{
@@ -56,7 +48,7 @@ class SHARED_EXPORT PyinCpp  {
 public:
     PyinCpp(const int sample_rate, const int block_size = _DEFAULT_BLOCK_SIZE, const int step_size = _DEFAULT_STEP_SIZE);
     ~PyinCpp();
-    // The cut off is a number between [0-1] that says whether to
+    // The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability
     void setCutOff(const float cut_off);
     float getCutOff();
     // Reserves the internal vectors for the given number of expected samples

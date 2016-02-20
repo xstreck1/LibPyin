@@ -25,7 +25,9 @@ HEADERS += \
     pyin/Yin.h \
     pyin/YinUtil.h \
     normal_dist_pdf.h \
-    pyincpp.h
+    pyincpp.h \
+    pyinc.h \
+    shared_export_def.h
 
 unix {
     target.path = /usr/lib
@@ -50,4 +52,5 @@ SOURCES += \
     pyin/Yin.cpp \
     pyin/YinUtil.cpp \
     normal_dist_pdf.cpp \
-    pyincpp.cpp
+    pyincpp.cpp \
+    pyinc.cpp
