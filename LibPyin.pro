@@ -29,11 +29,6 @@ HEADERS += \
     pyinc.h \
     shared_export_def.h
 
-unix {
-    target.path = /usr/lib
-    INSTALLS += target
-}
-
 SOURCES += \
     vamp-sdk/FFT.cpp \
     vamp-sdk/FFTimpl.cpp \
