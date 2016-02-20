@@ -55,5 +55,6 @@ void pyinc_clear(){
     if (_pyin_cpp) {
         _pyin_cpp->clear();
     }
+    _last_pitches.clear();
 }
 

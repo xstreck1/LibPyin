@@ -6,6 +6,7 @@
 
 #include "shared_export_def.h"
 
+// Forward declarations of VAMP and PYIN objects
 class PYIN;
 namespace _VampPlugin{
     namespace Vamp {
@@ -46,7 +47,12 @@ class SHARED_EXPORT PyinCpp  {
     int _cut_off;
 
 public:
+    // Creates a PYIN object, must be called before using pyinc
+    // [in]sample_rate  frequency of the track, e.g. 44100 samples per second
+    // [in]block_size   length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended
+    // [in]step_size    length of a step between two mined pitches, the smaller the slower, 512 is recommended
     PyinCpp(const int sample_rate, const int block_size = _DEFAULT_BLOCK_SIZE, const int step_size = _DEFAULT_STEP_SIZE);
+    //
     ~PyinCpp();
     // The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability
     void setCutOff(const float cut_off);
