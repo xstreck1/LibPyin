@@ -7,9 +7,9 @@ The library depends on the Pyin algorithm by M. Mauch and S. Dixon. See https://
 
 Compiling
 ---------
-A C++11 compliant compiler is needed, however there are no additional dependencies. The repository contains CMake and QMake files for easy compiling. 
+A C++11 compliant compiler is needed, however there are no additional dependencies. The repository contains [CMake](https://cmake.org/runningcmake/) and [QMake](http://doc.qt.io/qtcreator/creator-project-opening.html) files for easy compiling. 
 
-If do not want to use either for some reason, do set the BUILD_SHARED macro to make sure the symbols are correcly exported.
+If do not want to use either for some reason, and are making a project from the code yourself, do set the BUILD_SHARED macro to make sure the symbols are correcly exported.
 
 Use
 ---
