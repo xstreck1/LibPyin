@@ -25,8 +25,8 @@ HEADERS += \
     pyin/Yin.h \
     pyin/YinUtil.h \
     normal_dist_pdf.h \
-    pyincpp.h \
-    pyinc.h \
+    libpyincpp.h \
+    libpyinc.h \
     shared_export_def.h
 
 SOURCES += \
@@ -47,5 +47,5 @@ SOURCES += \
     pyin/Yin.cpp \
     pyin/YinUtil.cpp \
     normal_dist_pdf.cpp \
-    pyincpp.cpp \
-    pyinc.cpp
+    libpyincpp.cpp \
+    libpyinc.cpp

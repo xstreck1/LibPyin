@@ -47,7 +47,7 @@ class SHARED_EXPORT PyinCpp  {
     int _cut_off;
 
 public:
-    // Creates a PYIN object, must be called before using pyinc
+    // Creates a PYIN object, for each track you should create one object
     // [in]sample_rate  frequency of the track, e.g. 44100 samples per second
     // [in]block_size   length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended
     // [in]step_size    length of a step between two mined pitches, the smaller the slower, 512 is recommended

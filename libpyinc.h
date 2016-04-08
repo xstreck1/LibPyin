@@ -3,6 +3,7 @@
 
 #include "shared_export_def.h"
 
+// Pointers to the first and one beyond last mined pitch, i.e. the range is [begin, end)
 extern "C"
 {
 struct pyinc_pitch_range {
@@ -10,7 +11,7 @@ struct pyinc_pitch_range {
     const float * end;
 };
 
-// Creates a PYIN object, must be called before using pyinc
+// Initializes a PYIN object, must be called before using pyinc
 // [in]sample_rate  frequency of the track, e.g. 44100 samples per second
 // [in]block_size   length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended
 // [in]step_size    length of a step between two mined pitches, the smaller the slower, 512 is recommended

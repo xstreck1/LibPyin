@@ -1,5 +1,5 @@
 
-#include "pyincpp.h"
+#include "libpyincpp.h"
 #include "pyin/PYIN.h"
 
 #include <algorithm>

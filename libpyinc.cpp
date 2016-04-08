@@ -1,5 +1,5 @@
-#include "pyinc.h"
-#include "pyincpp.h"
+#include "libpyinc.h"
+#include "libpyincpp.h"
 #include <memory>
 
 std::unique_ptr<PyinCpp> _pyin_cpp;
