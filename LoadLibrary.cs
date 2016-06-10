@@ -15,13 +15,13 @@ public class LoadLibrary  {
         public float* end;
     }
 
-    [DllImport("PyinCpp")]
+    [DllImport("LibPyin")]
     static extern void pyinc_init(int sample_rate, int block_size, int step_size);
 
-    [DllImport("PyinCpp")]
+    [DllImport("LibPyin")]
     unsafe static extern pyinc_pitch_range pyinc_feed(float * data, int size);
 
-    [DllImport("PyinCpp")]
+    [DllImport("LibPyin")]
     unsafe static extern void pyinc_clear();
 
     // Use this for initialization
