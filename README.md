@@ -35,10 +35,10 @@ For each example first compile the library.
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. // Add the current location to the path so the library is loaded
     ./a.out
     
-### Unity 
+### Unity example
 
-1. Add LibPyin.dll and LoadLibrar.cs to your Assets.  
-2. Call `LoadLibrary.use();`
+1. Add LibPyin.dll and LoadLibrary.cs to your Assets.  
+2. Call `LoadLibrary.use();` from another script attached to a gameobject.
 
 
 ### C# example on Windows
