@@ -3,9 +3,12 @@
 
 #include "shared_export_def.h"
 
-// Pointers to the first and one beyond last mined pitch, i.e. the range is [begin, end)
+#ifdef __cplusplus
 extern "C"
 {
+#endif
+
+// Pointers to the first and one beyond last mined pitch, i.e. the range is [begin, end)
 struct pyinc_pitch_range {
     const float * begin;
     const float * end;
@@ -22,12 +25,21 @@ float SHARED_EXPORT pyinc_get_cut_off();
 // Reserves the internal vectors for the given number of expected samples
 void SHARED_EXPORT pyinc_reserve(int sample_count);
 // Feed new data and obtain the pitches mined using the new data !THE RANGE IS VALID ONLY UNTIL THE NEXT CALL OF pyinc_feed OR pyinc_clear
+#ifndef __cplusplus 
+struct
+#endif
 pyinc_pitch_range SHARED_EXPORT pyinc_feed(const float * new_samples, int sample_count);
 // Get all the mined pitches
+#ifndef __cplusplus 
+struct
+#endif
 pyinc_pitch_range SHARED_EXPORT pyinc_get_pitches();
 // Resets to the after-construction state
 void SHARED_EXPORT pyinc_clear();
+
+#ifdef __cplusplus
 }
+#endif
 
 
 #endif // PYINC_H
