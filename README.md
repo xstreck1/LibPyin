@@ -13,10 +13,41 @@ If do not want to use either for some reason, and are making a project from the 
 
 Use
 ---
-When using from C++, include "libpyincpp.h". When using from C, include "libpyinc.h". 
+When using from C++, include "libpyincpp.h". When using from C, include "libpyinc.h". In both cases link against LibPyin.
 
-For other languages the use depends on the language, but in general you will need to call the C interface. 
-An example with C# or Unity3D is shown in the file LoadLibrary.cs.
+Examples
+--------
+There is C, C++, and C# example present. Each example generates a short sine-wave of 440 hz and extracts the frequency from the wave.
+The usage is platform and language dependent. 
+
+For each example first compile the library.
+
+### C example on Unix
+    
+    gcc main.c -L"." -lLibPyin -lm
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. // Add the current location to the path so the library is loaded
+    ./a.out
+    
+ 
+### C++ example on Unix
+    
+    gcc main.cpp -L"." -lLibPyin -std=c++11
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. // Add the current location to the path so the library is loaded
+    ./a.out
+    
+### Unity 
+
+1. Add LibPyin.dll and LoadLibrar.cs to your Assets.  
+2. Call `LoadLibrary.use();`
+
+
+### C# example on Windows
+
+1. Before building LibPyin, set on the /clr support on the VS Settings/General. (You may need to switch /EHs to /EHa at Code Generation).
+2. Build as Debug and Release
+3. Run Visual Studio Developer prompt.
+3. `csc main.cs LoadLibrary.cs /unsafe /reference:Debug\LibPyin.dll /platform:x86`
+4. `main.exe`
 
 Cpp interface
 -------------
@@ -27,7 +58,7 @@ _Creates a PYIN object, for each track you should create one object
     
     PyinCpp(const int sample_rate, const int block_size = _DEFAULT_BLOCK_SIZE, const int step_size = _DEFAULT_STEP_SIZE);
     
-_The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability_
+_The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability (the pitch will be ignored if the probability is lower than the number)_
     
     void PyinCpp::setCutOff(const float cut_off);
     float PyinCpp::getCutOff();
@@ -58,7 +89,7 @@ _Initializes a PYIN object, must be called before using pyinc
 
     void SHARED_EXPORT pyinc_init(const int sample_rate, const int block_size, const int step_size);
 
-_The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability_
+_The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability (the pitch will be ignored if the probability is lower than the number)_
     
     void SHARED_EXPORT pyinc_set_cut_off(const float cut_off);
     float SHARED_EXPORT pyinc_get_cut_off();
