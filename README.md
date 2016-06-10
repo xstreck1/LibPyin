@@ -69,11 +69,11 @@ _Reserves the internal vectors for the given number of expected samples_
 
 _Feed new data and obtain the pitches mined using the new data !THE RANGE IS VALID ONLY UNTIL THE NEXT CALL OF pyinc_feed OR pyinc_clear_
 
-    pyinc_pitch_range SHARED_EXPORT pyinc_feed(const float * new_samples, int sample_count);
+    struct pyinc_pitch_range SHARED_EXPORT pyinc_feed(const float * new_samples, int sample_count);
 
 _Get all the mined pitches_
 
-    pyinc_pitch_range SHARED_EXPORT pyinc_get_pitches();
+    struct pyinc_pitch_range SHARED_EXPORT pyinc_get_pitches();
 
 _Resets to the after-construction state_
 
@@ -82,9 +82,8 @@ _Resets to the after-construction state_
 
 Licence
 -------
-GNU GPLv3 with attribution, I'm gonna contact the dev's to see if it could be changed to LGPLv3.
+GNU GPLv3 with attribution. The authors of Pyin ask to kindly attribute their work via a citation:
 
-The authors of Pyin ask to kindly attribute their work via a citation:
 ```
 @inproceedings{matthias2014a,
     author = {Matthias Mauch and Dixon, Simon},
