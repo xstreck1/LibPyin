@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cassert>
+#include <iostream>
 
 PyinCpp::PyinCpp(const int sample_rate, const int block_size, const int step_size) :
     _SAMPLE_RATE(sample_rate),
@@ -13,6 +14,7 @@ PyinCpp::PyinCpp(const int sample_rate, const int block_size, const int step_siz
     _TIME_STEP(new Vamp::RealTime(0, static_cast<int>(round(1000000.0 / (sample_rate / step_size))))),
     _pyin(new PYIN(_SAMPLE_RATE))
 {
+    _cut_off = 0;
     _conversion_head = 0;
     _time = new Vamp::RealTime(0, 0);
     _pyin->initialise(_CHANNEL_COUNT, _STEP_SIZE, _BLOCK_SIZE);

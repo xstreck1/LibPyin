@@ -31,7 +31,7 @@ int main() {
         float* res_ptr = pitches.begin;
         while (res_ptr != pitches.end)
         {
-            printf("%f", *res_ptr);
+            printf("%f ", *res_ptr);
             res_ptr++;
         }
 
