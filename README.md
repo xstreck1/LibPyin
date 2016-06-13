@@ -15,6 +15,9 @@ Use
 ---
 When using from C++, include "libpyincpp.h". When using from C, include "libpyinc.h". In both cases link against LibPyin.
 
+### Can I use LibPyin Source in My Code?
+Absolutelly, just copy-paste the source folder to your project and add it to the include path.
+
 Examples
 --------
 There is C, C++, and C# example present. Each example generates a short sine-wave of 440 hz and extracts the frequency from the wave.
@@ -31,7 +34,7 @@ For each example first compile the library.
  
 ### C++ example on Unix
     
-    gcc main.cpp -L"." -lLibPyin -std=c++11
+    g++ main.cpp -L"." -lLibPyin -std=c++11
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. // Add the current location to the path so the library is loaded
     ./a.out
     
