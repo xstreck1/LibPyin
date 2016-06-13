@@ -4,7 +4,7 @@
 
 // This code demonstrates using the C++ interface to LibPyin from C++
 
-#include "libpyincpp.h"	
+#include "source/libpyincpp.h"	
 
 #define M_PI acos(-1.0)
 
