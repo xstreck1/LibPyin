@@ -9,14 +9,14 @@ Compiling
 ---------
 A C++11 compliant compiler is needed, however there are no additional dependencies. The repository contains [CMake](https://cmake.org/runningcmake/) and [QMake](http://doc.qt.io/qtcreator/creator-project-opening.html) files for easy compiling. 
 
-If do not want to use either for some reason, and are making a project from the code yourself, do set the BUILD_SHARED macro to make sure the symbols are correcly exported.
+If do not want to use either for some reason, and are making a project from the code yourself, do set the `LIBPYIN_BUILD_SHARED` macro to make sure the symbols are correcly exported.
 
 Use
 ---
-When using from C++, include "libpyincpp.h". When using from C, include "libpyinc.h". In both cases link against LibPyin.
+When using from C++, include `libpyincpp.h`. When using from C, include `libpyinc.h` and link against `LibPyin`.
 
 ### Can I use LibPyin Source in My Code?
-Absolutelly, just copy-paste the source folder to your project and add it to the include path.
+Absolutelly, just copy-paste the `source` folder to your project and add it to the include path.
 
 Examples
 --------
@@ -90,7 +90,7 @@ _Initializes a PYIN object, must be called before using pyinc
 [in]block_size   length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended  
 [in]step_size    length of a step between two mined pitches, the smaller the slower, 512 is recommended_  
 
-    void SHARED_EXPORT pyinc_init(const int sample_rate, const int block_size, const int step_size);
+    void pyinc_init(const int sample_rate, const int block_size, const int step_size);
 
 _The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability (the pitch will be ignored if the probability is lower than the number)_
     
@@ -99,19 +99,19 @@ _The cut off is a number between [0-1] that says whether the pitch is still to b
 
 _Reserves the internal vectors for the given number of expected samples_
 
-    void SHARED_EXPORT pyinc_reserve(int sample_count);
+    void pyinc_reserve(int sample_count);
 
 _Feed new data and obtain the pitches mined using the new data !THE RANGE IS VALID ONLY UNTIL THE NEXT CALL OF pyinc_feed OR pyinc_clear_
 
-    struct pyinc_pitch_range SHARED_EXPORT pyinc_feed(const float * new_samples, int sample_count);
+    struct pyinc_pitch_range pyinc_feed(const float * new_samples, int sample_count);
 
 _Get all the mined pitches_
 
-    struct pyinc_pitch_range SHARED_EXPORT pyinc_get_pitches();
+    struct pyinc_pitch_range pyinc_get_pitches();
 
 _Resets to the after-construction state_
 
-    void SHARED_EXPORT pyinc_clear();
+    void  pyinc_clear();
 
 
 Licence
