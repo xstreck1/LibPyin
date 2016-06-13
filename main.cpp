@@ -6,6 +6,7 @@
 
 #include "libpyincpp.h"	
 
+#define M_PI acos(-1.0)
 
 int main() {
         int SAMPLE_RATE = 44100;
@@ -16,6 +17,7 @@ int main() {
         // Prepare objects
         PyinCpp my_pyin(SAMPLE_RATE);
         std::vector<float> samples(SAMPLE_COUNT);
+
 
         // Generate a 440 herz sine wave
         float freq = 440;
