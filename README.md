@@ -40,8 +40,9 @@ For each example first compile the library.
     
 ### Unity example
 
-1. Add LibPyin.dll and LoadLibrary.cs to your Assets.  
-2. Call `LoadLibrary.use();` from another script attached to a gameobject.
+1. Download the Release of the complied .dll .
+2. Add LibPyin.dll and LoadLibrary.cs to your Assets.  
+3. Call `LoadLibrary.use();` from another script attached to a gameobject.
 
 
 ### C# example on Windows
