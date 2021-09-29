@@ -3,7 +3,7 @@ LibPyin pitch detection library
 
 LibPyin is a plug-in library for pitch (fundamental frequency) detection (see here https://en.wikipedia.org/wiki/Pitch_detection_algorithm). The library provides simple C and C++ interface for easy incorporability to projects in other languages.
 
-The library depends on the Pyin algorithm by M. Mauch and S. Dixon. See https://code.soundsoftware.ac.uk/projects/pyin for details.
+The library depends on the pYIN algorithm by M. Mauch and S. Dixon. See https://code.soundsoftware.ac.uk/projects/pyin for details.
 
 Compiling
 ---------
@@ -117,15 +117,16 @@ _Resets to the after-construction state_
 
 Licence
 -------
-GNU GPLv3 with attribution. The authors of Pyin ask to kindly attribute their work via a citation:
+GNU GPLv3 with attribution. The authors of pYIN ask to kindly attribute their work via a citation:
 
 ```
-@inproceedings{matthias2014a,
-    author = {Matthias Mauch and Dixon, Simon},
-    title = {pYIN: A Fundamental Frequency Estimator Using Probabilistic Threshold Distributions},
-    booktitle = {Proceedings of the IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP 2014)},
-    note = {in press},
-    year = {2014}
+@INPROCEEDINGS{6853678,
+  author={Mauch, Matthias and Dixon, Simon},
+  booktitle={2014 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+  title={PYIN: A fundamental frequency estimator using probabilistic threshold distributions}, 
+  year={2014},
+  pages={659-663},
+  doi={10.1109/ICASSP.2014.6853678}}
 } 
 ```
 
