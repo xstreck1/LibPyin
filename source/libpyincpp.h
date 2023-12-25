@@ -44,7 +44,7 @@ class SHARED_EXPORT PyinCpp  {
 
     // Paramteres
     // the thresholds for when to still consider pitch a success
-    int _cut_off;
+    float _cut_off;
 
 public:
     // Creates a PYIN object, for each track you should create one object

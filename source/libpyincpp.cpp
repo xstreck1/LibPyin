@@ -14,7 +14,7 @@ PyinCpp::PyinCpp(const int sample_rate, const int block_size, const int step_siz
     _TIME_STEP(new Vamp::RealTime(0, static_cast<int>(round(1000000.0 / (sample_rate / step_size))))),
     _pyin(new PYIN(_SAMPLE_RATE))
 {
-    _cut_off = 0;
+    _cut_off = 0.0;
     _conversion_head = 0;
     _time = new Vamp::RealTime(0, 0);
     _pyin->initialise(_CHANNEL_COUNT, _STEP_SIZE, _BLOCK_SIZE);
@@ -43,6 +43,7 @@ float PyinCpp::getCutOff() {
 
 void PyinCpp::clear() {
     _conversion_head = 0;
+    _cut_off = 0.0;
     delete _time;
     _time = new Vamp::RealTime(0, 0);
     _pyin->reset();
@@ -68,7 +69,7 @@ std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples) {
         if (!features.empty() && !features.at(0).empty() && !features.at(0).at(0).values.empty()) {
             auto max_prob_it = std::max_element(begin(features.at(0).at(1).values), end(features.at(0).at(1).values));
             int max_prob_i = std::distance(begin(features.at(0).at(1).values), max_prob_it);
-            if (max_prob_i >= _cut_off) {
+            if (features.at(0).at(1).values[max_prob_i] >= _cut_off) {
                 _pitches.emplace_back(features.at(0).at(0).values[max_prob_i]);
             }
             else {

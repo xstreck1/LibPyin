@@ -14,8 +14,8 @@ int main() {
 
     // Prepare objects
     PyinCpp my_pyin(SAMPLE_RATE);
+    my_pyin.setCutOff(0.99);
     std::vector<float> samples(SAMPLE_COUNT);
-
 
     // Generate a 440 herz sine wave
     float freq = 440;
