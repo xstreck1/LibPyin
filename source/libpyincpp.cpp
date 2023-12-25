@@ -59,7 +59,7 @@ std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples) {
 
     float* pointers[1];
     // Convert all the available blocks
-    while (_samples.size() - _conversion_head > _BLOCK_SIZE) {
+    while (_samples.size() - _conversion_head >= _BLOCK_SIZE) {
         pointers[0] = _samples.data() + _conversion_head;
         PYIN::FeatureSet features = _pyin->process((const float* const*) pointers, *_time);
         *_time = *_time + *_TIME_STEP;

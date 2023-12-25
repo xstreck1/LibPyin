@@ -8,7 +8,7 @@
 
 int main() {
     int SAMPLE_RATE = 44100;
-    int SAMPLE_COUNT = 10000;
+    int SAMPLE_COUNT = 2048*2;
     int BLOCK_SIZE = 2048;
     int STEP_SIZE = 512;
 
