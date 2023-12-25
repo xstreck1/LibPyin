@@ -32,4 +32,5 @@ int main() {
     {
         std::cout << pitch << " ";
     }
+    std::cout << std::endl;
 }
