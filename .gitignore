@@ -3,6 +3,7 @@ Debug*
 Release*
 Win32*
 main.exe
+*.out
 
 
 # CMAKE

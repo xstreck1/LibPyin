@@ -9,7 +9,14 @@ Compiling
 ---------
 A C++11 compliant compiler is needed, however there are no additional dependencies. The repository contains [CMake](https://cmake.org/runningcmake/) and [QMake](http://doc.qt.io/qtcreator/creator-project-opening.html) files for easy compiling. 
 
-If do not want to use either for some reason, and are making a project from the code yourself, do set the `LIBPYIN_BUILD_SHARED` macro to make sure the symbols are correcly exported.
+To compile the library, run:
+
+````bash
+cmake CMakeLists.txt
+make
+````
+
+If do not want to use either for some reason, and are making a project from the code yourself, do set the `LIBPYIN_BUILD_SHARED` macro to make sure the symbols are correcly exported (see CMakeLists.txt for details).
 
 Use
 ---
@@ -26,18 +33,21 @@ The usage is platform and language dependent.
 For each example first compile the library.
 
 ### C example on Unix
-    
-    gcc main.c -L"." -lLibPyin -lm
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. // Add the current location to the path so the library is loaded
-    ./a.out
+
+````bash
+gcc main.c -L"." -lLibPyin -lm
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. # Add the current location to the path so the library is loaded
+./a.out
+````
     
  
 ### C++ example on Unix
-    
-    g++ main.cpp -L"." -lLibPyin -std=c++11
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. // Add the current location to the path so the library is loaded
-    ./a.out
-    
+````bash
+g++ main.cpp -L"." -lLibPyin -std=c++11
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. # Add the current location to the path so the library is loaded
+./a.out
+````
+
 ### Unity example
 
 1. Download the Release of the complied .dll .
@@ -60,29 +70,44 @@ _Creates a PYIN object, for each track you should create one object
 [in]block_size   length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended  
 [in]step_size    length of a step between two mined pitches, the smaller the slower, 512 is recommended_  
     
-    PyinCpp(const int sample_rate, const int block_size = _DEFAULT_BLOCK_SIZE, const int step_size = _DEFAULT_STEP_SIZE);
-    
+````C++
+PyinCpp(
+    const int sample_rate, 
+    const int block_size = _DEFAULT_BLOCK_SIZE, 
+    const int step_size = _DEFAULT_STEP_SIZE);
+````
+
 _The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability (the pitch will be ignored if the probability is lower than the number)_
-    
-    void PyinCpp::setCutOff(const float cut_off);
-    float PyinCpp::getCutOff();
+
+````C++ 
+void PyinCpp::setCutOff(const float cut_off);
+float PyinCpp::getCutOff();
+````
     
 _Reserves the internal vectors for the given number of expected samples_
-    
-    void PyinCpp::reserve(int sample_count);
+
+````C++
+void PyinCpp::reserve(int sample_count);
+````
     
 _Feed new data and obtain the pitches mined using the new data_
 
-    std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples);
+````C++
+std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples);
+````
     
 _Get all the mined pitches_
 
-    const std::vector<float> & PyinCpp::getPitches() const;
+````C++
+const std::vector<float> & PyinCpp::getPitches() const;
+````
 
 _Resets to the after-construction state_
 
-    void PyinCpp::clear();
-	
+````C++
+void PyinCpp::clear();
+````
+
 
 C interface
 -----------
@@ -91,35 +116,50 @@ _Initializes a PYIN object, must be called before using pyinc
 [in]block_size   length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended  
 [in]step_size    length of a step between two mined pitches, the smaller the slower, 512 is recommended_  
 
-    void pyinc_init(const int sample_rate, const int block_size, const int step_size);
+````C
+void pyinc_init(
+    const int sample_rate, 
+    const int block_size, 
+    const int step_size);
+````
 
 _The cut off is a number between [0-1] that says whether the pitch is still to be considered as correct based on the estimate probability (the pitch will be ignored if the probability is lower than the number)_
     
-    void SHARED_EXPORT pyinc_set_cut_off(const float cut_off);
-    float SHARED_EXPORT pyinc_get_cut_off();
+````C
+void SHARED_EXPORT pyinc_set_cut_off(const float cut_off);
+float SHARED_EXPORT pyinc_get_cut_off();
+````
 
 _Reserves the internal vectors for the given number of expected samples_
 
-    void pyinc_reserve(int sample_count);
+````C
+void pyinc_reserve(int sample_count);
+````
 
 _Feed new data and obtain the pitches mined using the new data !THE RANGE IS VALID ONLY UNTIL THE NEXT CALL OF pyinc_feed OR pyinc_clear_
 
-    struct pyinc_pitch_range pyinc_feed(const float * new_samples, int sample_count);
+````C
+struct pyinc_pitch_range pyinc_feed(const float * new_samples, int sample_count);
+````
 
 _Get all the mined pitches_
 
-    struct pyinc_pitch_range pyinc_get_pitches();
+````C
+struct pyinc_pitch_range pyinc_get_pitches();
+````
 
 _Resets to the after-construction state_
 
-    void  pyinc_clear();
+````C
+void  pyinc_clear();
+````
 
 
 Licence
 -------
 GNU GPLv3 with attribution. The authors of pYIN ask to kindly attribute their work via a citation:
 
-```
+````bibtex
 @INPROCEEDINGS{6853678,
   author={Mauch, Matthias and Dixon, Simon},
   booktitle={2014 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
@@ -128,5 +168,4 @@ GNU GPLv3 with attribution. The authors of pYIN ask to kindly attribute their wo
   pages={659-663},
   doi={10.1109/ICASSP.2014.6853678}}
 } 
-```
-
+````
