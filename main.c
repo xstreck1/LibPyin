@@ -27,12 +27,28 @@ int main() {
         // Mine pitches
         struct pyinc_pitch_range pitches = pyinc_feed(ptr, SAMPLE_COUNT);
 
-        // Go through and print the pitches
+        // Go through and print the pitches (max probability pitch per frame)
+        printf("Pitches (max probability per frame): ");
         float* res_ptr = pitches.begin;
         while (res_ptr != pitches.end)
         {
             printf("%f ", *res_ptr);
             res_ptr++;
+        }
+        printf("\n");
+        
+        // Get all frequency-probability pairs
+        int frame_count = pyinc_get_candidate_frame_count();
+        printf("\nFrequency-Probability pairs for each frame:\n");
+        for (int frame = 0; frame < frame_count; frame++) {
+            struct pyinc_candidate_range candidates = pyinc_get_candidates_for_frame(frame);
+            printf("Frame %d: ", frame);
+            const struct pyinc_pitch_candidate* cand_ptr = candidates.begin;
+            while (cand_ptr != candidates.end) {
+                printf("(%f Hz, %f) ", cand_ptr->frequency, cand_ptr->probability);
+                cand_ptr++;
+            }
+            printf("\n");
         }
 
 	free(ptr);

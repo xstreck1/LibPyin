@@ -102,6 +102,14 @@ _Get all the mined pitches_
 const std::vector<float> & PyinCpp::getPitches() const;
 ````
 
+_Get all frequency-probability candidate pairs for each frame_
+
+````C++
+const std::vector<std::vector<std::pair<float, float>>> & PyinCpp::getPitchCandidates() const;
+````
+
+Each element in the returned vector corresponds to a frame. For each frame, you get a vector of (frequency, probability) pairs representing all pitch candidates detected by the PYIN algorithm.
+
 _Resets to the after-construction state_
 
 ````C++
@@ -147,6 +155,28 @@ _Get all the mined pitches_
 ````C
 struct pyinc_pitch_range pyinc_get_pitches();
 ````
+
+_Get the number of frames with pitch candidates_
+
+````C
+int pyinc_get_candidate_frame_count();
+````
+
+_Get pitch candidates for a specific frame index_
+
+````C
+struct pyinc_candidate_range pyinc_get_candidates_for_frame(int frame_index);
+````
+
+The `pyinc_pitch_candidate` structure contains:
+````C
+struct pyinc_pitch_candidate {
+    float frequency;
+    float probability;
+};
+````
+
+This allows you to access all frequency-probability pairs returned by the PYIN algorithm for each frame, as described in the original PYIN paper.
 
 _Resets to the after-construction state_
 

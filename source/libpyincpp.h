@@ -39,6 +39,8 @@ class SHARED_EXPORT PyinCpp  {
     std::vector<float> _samples;
     // Holds the extracted fequencies
     std::vector<float> _pitches;
+    // Holds all frequency-probability pairs for each frame
+    std::vector<std::vector<std::pair<float, float>>> _pitch_candidates;
     // First not-yet converted sample
     std::size_t _conversion_head;
 
@@ -63,6 +65,8 @@ public:
     std::vector<float> feed(const std::vector<float> & new_samples);
     // Get all the mined pitches
     const std::vector<float> & getPitches() const;
+    // Get all frequency-probability candidate pairs for each frame
+    const std::vector<std::vector<std::pair<float, float>>> & getPitchCandidates() const;
     // Resets to the after-construction state
     void clear();
 };
