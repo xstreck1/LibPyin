@@ -27,10 +27,22 @@ int main() {
     // Mine pitches
     std::vector<float> pitches = my_pyin.feed(samples);
 
-    // Go through and print the pitches
+    // Go through and print the pitches (max probability pitch per frame)
+    std::cout << "Pitches (max probability per frame): ";
     for (const float pitch : pitches)
     {
         std::cout << pitch << " ";
     }
     std::cout << std::endl;
+    
+    // Get all frequency-probability pairs
+    const auto& candidates = my_pyin.getPitchCandidates();
+    std::cout << "\nFrequency-Probability pairs for each frame:\n";
+    for (size_t frame = 0; frame < candidates.size(); ++frame) {
+        std::cout << "Frame " << frame << ": ";
+        for (const auto& pair : candidates[frame]) {
+            std::cout << "(" << pair.first << " Hz, " << pair.second << ") ";
+        }
+        std::cout << std::endl;
+    }
 }

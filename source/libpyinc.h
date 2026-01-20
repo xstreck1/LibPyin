@@ -14,6 +14,18 @@ struct pyinc_pitch_range {
     const float * end;
 };
 
+// A single frequency-probability pair
+struct pyinc_pitch_candidate {
+    float frequency;
+    float probability;
+};
+
+// Pointers to the first and one beyond last pitch candidate for a single frame
+struct pyinc_candidate_range {
+    const struct pyinc_pitch_candidate * begin;
+    const struct pyinc_pitch_candidate * end;
+};
+
 // Initializes a PYIN object, must be called before using pyinc
 // [in]sample_rate  frequency of the track, e.g. 44100 samples per second
 // [in]block_size   length of a block used for obtaining a pitch, the higher the slower, 2048 is recommended
@@ -34,6 +46,13 @@ pyinc_pitch_range SHARED_EXPORT pyinc_feed(const float * new_samples, int sample
 struct
 #endif
 pyinc_pitch_range SHARED_EXPORT pyinc_get_pitches();
+// Get the number of frames with pitch candidates
+int SHARED_EXPORT pyinc_get_candidate_frame_count();
+// Get pitch candidates for a specific frame index
+#ifndef __cplusplus 
+struct
+#endif
+pyinc_candidate_range SHARED_EXPORT pyinc_get_candidates_for_frame(int frame_index);
 // Resets to the after-construction state
 void SHARED_EXPORT pyinc_clear();
 

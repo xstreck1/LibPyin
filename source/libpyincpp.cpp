@@ -24,6 +24,7 @@ void PyinCpp::reserve(const int expected_sample_count) {
     if (expected_sample_count != 0) {
         _samples.reserve(expected_sample_count);
         _pitches.reserve(expected_sample_count / _STEP_SIZE); // It's a few more than needed usually, cause the last block has only the first step tested, no need to optimize
+        _pitch_candidates.reserve(expected_sample_count / _STEP_SIZE);
     }
 }
 
@@ -49,6 +50,7 @@ void PyinCpp::clear() {
     _pyin->reset();
     _samples.clear();
     _pitches.clear();
+    _pitch_candidates.clear();
 }
 
 std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples) {
@@ -67,6 +69,14 @@ std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples) {
 
         // Get the maximal probability pitch
         if (!features.empty() && !features.at(0).empty() && !features.at(0).at(0).values.empty()) {
+            // Store all frequency-probability pairs for this frame
+            std::vector<std::pair<float, float>> candidates;
+            for (size_t i = 0; i < features.at(0).at(0).values.size(); ++i) {
+                candidates.emplace_back(features.at(0).at(0).values[i], features.at(0).at(1).values[i]);
+            }
+            _pitch_candidates.emplace_back(candidates);
+            
+            // For backward compatibility, still store the max probability pitch
             auto max_prob_it = std::max_element(begin(features.at(0).at(1).values), end(features.at(0).at(1).values));
             int max_prob_i = std::distance(begin(features.at(0).at(1).values), max_prob_it);
             if (features.at(0).at(1).values[max_prob_i] >= _cut_off) {
@@ -77,6 +87,7 @@ std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples) {
             }
         }
         else {
+            _pitch_candidates.emplace_back(std::vector<std::pair<float, float>>());
             _pitches.emplace_back(-1);
         }
     }
@@ -86,4 +97,8 @@ std::vector<float> PyinCpp::feed(const std::vector<float> & new_samples) {
 
 const std::vector<float> &PyinCpp::getPitches() const {
     return _pitches;
+}
+
+const std::vector<std::vector<std::pair<float, float>>> &PyinCpp::getPitchCandidates() const {
+    return _pitch_candidates;
 }
